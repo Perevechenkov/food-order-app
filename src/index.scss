@@ -1,0 +1,15 @@
+@use "./abstracts/variables" as *;
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  font-family: sans-serif;
+}
+
+body {
+  margin: 0;
+
+  background-color: $bg-primary-dark;
+}
