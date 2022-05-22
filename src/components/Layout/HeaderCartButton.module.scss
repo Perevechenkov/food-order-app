@@ -1,0 +1,39 @@
+@use "../../abstracts/variables" as *;
+
+.button {
+     padding: 0.75rem 3rem;
+
+     display: flex;
+     align-items: center;
+
+     border: none;
+     border-radius: 25px;
+
+     background-color: $brown-dark;
+     color: $text-color;
+     font: inherit;
+     font-weight: bold;
+     cursor: pointer;
+
+     &:hover,
+     &:active {
+          background-color: $brown-dark-hover;
+     }
+
+     .icon {
+          width: 1.35rem;
+          height: 1.35rem;
+          margin-right: 0.5rem;
+     }
+
+     .badge {
+          margin-left: 1rem;
+          padding: 0.25rem 1rem;
+
+          border-radius: 25px;
+
+          background-color: $bg-primary-light;
+
+          font-weight: bold;
+     }
+}
