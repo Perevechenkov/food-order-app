@@ -1,0 +1,53 @@
+@use "../../abstracts/variables" as *;
+
+.cart-items {
+     max-height: 20rem;
+     margin: 0;
+     padding: 0;
+
+     list-style: none;
+     overflow: auto;
+}
+
+.total {
+     margin: 1rem 0;
+
+     display: flex;
+     justify-content: space-between;
+     align-items: center;
+
+     font-weight: bold;
+     font-size: 1.5rem;
+}
+
+.actions {
+     text-align: right;
+
+     button {
+          padding: 0.5rem 2rem;
+          margin-left: 1rem;
+
+          border: 1px solid $bg-primary-orange;
+          border-radius: 25px;
+
+          background-color: transparent;
+          font: inherit;
+          cursor: pointer;
+
+          &:hover,
+          &:active {
+               border-color: $brown-dark;
+               background-color: $brown-dark;
+               color: $text-color;
+          }
+     }
+
+     .button {
+          background-color: $bg-primary-orange;
+          color: $text-color;
+     }
+
+     .button--alt {
+          color: $bg-primary-orange;
+     }
+}
