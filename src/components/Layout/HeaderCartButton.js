@@ -19,7 +19,7 @@ export default function HeaderCartButton(props) {
   }`;
 
   useEffect(() => {
-    if (cartCtx.items.length === 0) return;
+    if (items.length === 0) return;
     setBtnIsHighlighted(true);
 
     const timerId = setTimeout(() => {
