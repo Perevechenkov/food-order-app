@@ -1,0 +1,24 @@
+@use "../../abstracts/variables" as *;
+
+.input {
+     margin-bottom: 0.5rem;
+
+     display: flex;
+     align-items: center;
+
+     label {
+          margin-right: 1rem;
+
+          font-weight: bold;
+     }
+
+     input {
+          width: 3rem;
+          padding-left: 0.5rem;
+
+          border: 1px solid $border-dark;
+          border-radius: 5px;
+
+          font: inherit;
+     }
+}
