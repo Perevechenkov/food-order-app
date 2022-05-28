@@ -5,6 +5,11 @@
      color: $text-color;
 }
 
+.meals-error {
+     text-align: center;
+     color: $text-error;
+}
+
 .meals {
      width: 90%;
      max-width: 60rem;

@@ -8,42 +8,51 @@ export default function AvailableMeals() {
   const [meals, setMeals] = useState([]);
 
   const [isLoading, setIsLoading] = useState(true);
+  const [httpError, setHttpError] = useState();
 
   useEffect(() => {
     const fetchMeals = async () => {
-      try {
-        const response = await fetch(
-          'https://movies-dummy-db-default-rtdb.europe-west1.firebasedatabase.app/meals.json'
-        );
+      const response = await fetch(
+        'https://movies-dummy-db-default-rtdb.europe-west1.firebasedatabase.app/meals.json'
+      );
 
-        if (!response.ok) throw new Error(response.statusText);
-        const data = await response.json();
+      if (!response.ok) throw new Error(response.statusText);
 
-        const loadedMeals = [];
+      const data = await response.json();
 
-        for (const key in data) {
-          loadedMeals.push({
-            id: key,
-            name: data[key].name,
-            description: data[key].description,
-            price: data[key].price,
-          });
-        }
+      const loadedMeals = [];
 
-        setMeals(loadedMeals);
-        setIsLoading(false);
-      } catch (err) {
-        console.log(err);
+      for (const key in data) {
+        loadedMeals.push({
+          id: key,
+          name: data[key].name,
+          description: data[key].description,
+          price: data[key].price,
+        });
       }
+
+      setMeals(loadedMeals);
+      setIsLoading(false);
     };
 
-    fetchMeals();
+    fetchMeals().catch(err => {
+      setIsLoading(false);
+      setHttpError(err.message);
+    });
   }, []);
 
   if (isLoading) {
     return (
       <section className={classes['meals-loading']}>
         <p>Loading...</p>
+      </section>
+    );
+  }
+
+  if (httpError) {
+    return (
+      <section className={classes['meals-error']}>
+        <p>{httpError}</p>
       </section>
     );
   }
