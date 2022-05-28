@@ -7,6 +7,8 @@ import classes from './AvailableMeals.module.scss';
 export default function AvailableMeals() {
   const [meals, setMeals] = useState([]);
 
+  const [isLoading, setIsLoading] = useState(true);
+
   useEffect(() => {
     const fetchMeals = async () => {
       try {
@@ -29,6 +31,7 @@ export default function AvailableMeals() {
         }
 
         setMeals(loadedMeals);
+        setIsLoading(false);
       } catch (err) {
         console.log(err);
       }
@@ -36,6 +39,14 @@ export default function AvailableMeals() {
 
     fetchMeals();
   }, []);
+
+  if (isLoading) {
+    return (
+      <section className={classes['meals-loading']}>
+        <p>Loading...</p>
+      </section>
+    );
+  }
 
   const mealsList = meals.map(meal => (
     <MealItem
