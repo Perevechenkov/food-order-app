@@ -1,0 +1,80 @@
+@use "../../abstracts/variables" as *;
+
+.form {
+     margin: 1rem 0;
+     overflow: auto;
+
+     .control {
+          margin-bottom: 0.5rem;
+
+          label {
+               margin-bottom: 0.25rem;
+
+               display: block;
+
+               font-weight: bold;
+          }
+
+          input {
+               width: 25rem;
+               max-width: 100%;
+               padding: 0.2rem 0;
+               padding-left: 0.5rem;
+
+               border: 1px solid $border-dark-opace;
+               border-radius: 5px;
+
+               background-color: $bg-primary-light;
+               font: inherit;
+
+               &:focus {
+                    outline: none;
+                    border-color: $border-dark;
+               }
+          }
+
+          .invalid {
+               label {
+                    color: $text-error;
+               }
+
+               input {
+                    border-color: $text-error;
+                    background-color: $bg-error;
+               }
+          }
+     }
+
+     .actions {
+          margin-top: 1rem;
+
+          display: flex;
+          justify-content: flex-end;
+          gap: 1rem;
+
+          button {
+               padding: 0.5rem 2rem;
+               margin-left: 1rem;
+
+               border: 1px solid $bg-primary-orange;
+               border-radius: 25px;
+
+               background-color: transparent;
+               color: $bg-primary-orange;
+               font: inherit;
+               cursor: pointer;
+
+               &:hover,
+               &:active {
+                    border-color: $brown-dark;
+                    background-color: $brown-dark;
+                    color: $text-color;
+               }
+          }
+
+          .actions--submit {
+               background-color: $bg-primary-orange;
+               color: $text-color;
+          }
+     }
+}
