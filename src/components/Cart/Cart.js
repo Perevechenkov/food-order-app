@@ -21,6 +21,8 @@ export default function Cart(props) {
 
   const cartItemRemoveHandler = id => {
     cartCtx.removeItem(id);
+
+    if (cartCtx.items.length === 1) setIsCheckout(false);
   };
 
   const orderHadler = () => {
@@ -62,7 +64,7 @@ export default function Cart(props) {
         <span>Total Amount</span>
         <span>{totalAmount}</span>
       </div>
-      {isCheckout && <Checkout onCancel={props.onClose} />}
+      {isCheckout && hasItems && <Checkout onCancel={props.onClose} />}
       {!isCheckout && modalActions}
     </Modal>
   );
