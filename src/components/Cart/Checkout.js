@@ -1,4 +1,5 @@
 import useInput from '../hooks/use-input';
+import Input from '../UI/Input';
 import classes from './Checkout.module.scss';
 
 const isNotEmpty = value => value.trim().length !== 0;
@@ -36,6 +37,7 @@ export default function Checkout(props) {
   } = useInput(
     enteredCode => isNotEmpty(enteredCode) && isPostalCode(enteredCode)
   );
+
   const {
     value: cityValue,
     isValid: cityIsValid,
@@ -67,60 +69,62 @@ export default function Checkout(props) {
 
   return (
     <form className={classes.form} onSubmit={confirmHandler}>
-      <div className={firstNameInputClasses}>
-        <label htmlFor='name'>Your Name</label>
-        <input
-          type='text'
-          id='name'
-          value={nameValue}
-          onChange={nameChangeHandler}
-          onBlur={nameBlurHandler}
-        ></input>
-        {nameHasError && (
-          <p className={classes['error-text']}>Name must not be empty</p>
-        )}
-      </div>
-      <div className={secondNameInputClasses}>
-        <label htmlFor='street'>Street</label>
-        <input
-          type='text'
-          id='street'
-          value={streetValue}
-          onChange={streetChangeHandler}
-          onBlur={streetBlurHandler}
-        ></input>
-        {streetHasError && (
-          <p className={classes['error-text']}>Street must not be empty</p>
-        )}
-      </div>
-      <div className={emailInputClasses}>
-        <label htmlFor='postal'>Postal Code</label>
-        <input
-          type='text'
-          id='postal'
-          value={postalValue}
-          onChange={postalChangeHandler}
-          onBlur={postalBlurHandler}
-        ></input>
-        {postalHasError && (
-          <p className={classes['error-text']}>
-            Postal code must not be empty and not contain letters
-          </p>
-        )}
-      </div>
-      <div className={cityInputClasses}>
-        <label htmlFor='city'>City</label>
-        <input
-          type='text'
-          id='city'
-          value={cityValue}
-          onChange={cityChangeHandler}
-          onBlur={cityBlurHandler}
-        ></input>
-        {cityHasError && (
-          <p className={classes['error-text']}>City must not be empty</p>
-        )}
-      </div>
+      <Input
+        classes={firstNameInputClasses}
+        errClasses={classes['error-text']}
+        label='Your Name'
+        input={{
+          type: 'text',
+          id: 'name',
+          value: nameValue,
+          onChange: nameChangeHandler,
+          onBlur: nameBlurHandler,
+        }}
+        hasError={nameHasError}
+        errorText='Name must not be empty'
+      />
+      <Input
+        classes={secondNameInputClasses}
+        errClasses={classes['error-text']}
+        label='Street'
+        input={{
+          type: 'text',
+          id: 'street',
+          value: streetValue,
+          onChange: streetChangeHandler,
+          onBlur: streetBlurHandler,
+        }}
+        hasError={streetHasError}
+        errorText='Street must not be empty'
+      />
+      <Input
+        classes={emailInputClasses}
+        errClasses={classes['error-text']}
+        label='Postal Code'
+        input={{
+          type: 'text',
+          id: 'postal',
+          value: postalValue,
+          onChange: postalChangeHandler,
+          onBlur: postalBlurHandler,
+        }}
+        hasError={postalHasError}
+        errorText='Postal code must not be empty and not contain letters'
+      />
+      <Input
+        classes={cityInputClasses}
+        errClasses={classes['error-text']}
+        label='City'
+        input={{
+          type: 'text',
+          id: 'city',
+          value: cityValue,
+          onChange: cityChangeHandler,
+          onBlur: cityBlurHandler,
+        }}
+        hasError={cityHasError}
+        errorText='City must not be empty'
+      />
       <div className={classes.actions}>
         <button type='button' onClick={props.onCancel}>
           Cancel
