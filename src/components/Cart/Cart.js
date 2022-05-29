@@ -9,6 +9,8 @@ import Checkout from './Checkout';
 export default function Cart(props) {
   const cartCtx = useContext(CartContext);
 
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [didSubmit, setDidSubmit] = useState(false);
   const [isCheckout, setIsCheckout] = useState(false);
 
   const totalAmount = `$${Math.abs(cartCtx.totalAmount.toFixed(2))}`;
@@ -30,6 +32,8 @@ export default function Cart(props) {
   };
 
   const submitOrderHadnler = async userData => {
+    setIsSubmitting(true);
+
     try {
       const response = await fetch(
         'https://movies-dummy-db-default-rtdb.europe-west1.firebasedatabase.app/orders.json',
@@ -44,6 +48,10 @@ export default function Cart(props) {
       );
 
       if (!response.ok) throw new Error(response.statusText);
+
+      cartCtx.clear();
+      setIsSubmitting(false);
+      setDidSubmit(true);
     } catch (err) {
       console.log(err.message);
     }
@@ -77,8 +85,8 @@ export default function Cart(props) {
     </div>
   );
 
-  return (
-    <Modal onClose={props.onClose}>
+  const cartModalContent = (
+    <>
       {cartItems}
       <div className={classes.total}>
         <span>Total Amount</span>
@@ -88,6 +96,26 @@ export default function Cart(props) {
         <Checkout onCancel={props.onClose} onConfirm={submitOrderHadnler} />
       )}
       {!isCheckout && modalActions}
+    </>
+  );
+
+  const isSubmittingModal = <p>Sending order data</p>;
+  const didSubmitModal = (
+    <>
+      <p>Successfully sent the order</p>
+      <div className={classes.actions}>
+        <button className={classes.button} onClick={props.onClose}>
+          Close
+        </button>
+      </div>
+    </>
+  );
+
+  return (
+    <Modal onClose={props.onClose}>
+      {!isSubmitting && !didSubmit && cartModalContent}
+      {isSubmitting && isSubmittingModal}
+      {didSubmit && didSubmitModal}
     </Modal>
   );
 }
