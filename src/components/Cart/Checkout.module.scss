@@ -7,6 +7,21 @@
      .control {
           margin-bottom: 0.5rem;
 
+          &.invalid {
+               label {
+                    color: $text-error;
+               }
+
+               input {
+                    border-color: $text-error;
+                    background-color: $bg-error;
+               }
+          }
+
+          .error-text {
+               color: $text-error;
+          }
+
           label {
                margin-bottom: 0.25rem;
 
@@ -30,17 +45,6 @@
                &:focus {
                     outline: none;
                     border-color: $border-dark;
-               }
-          }
-
-          .invalid {
-               label {
-                    color: $text-error;
-               }
-
-               input {
-                    border-color: $text-error;
-                    background-color: $bg-error;
                }
           }
      }
@@ -69,6 +73,13 @@
                     border-color: $brown-dark;
                     background-color: $brown-dark;
                     color: $text-color;
+               }
+
+               &:disabled {
+                    border-color: $border-light-opace;
+                    background-color: $border-light-opace;
+                    color: $border-dark;
+                    cursor: not-allowed;
                }
           }
 
