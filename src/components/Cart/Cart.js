@@ -22,11 +22,31 @@ export default function Cart(props) {
   const cartItemRemoveHandler = id => {
     cartCtx.removeItem(id);
 
-    if (cartCtx.items.length === 1) setIsCheckout(false);
+    if (cartCtx.items[0].amount === 1) setIsCheckout(false);
   };
 
   const orderHadler = () => {
     setIsCheckout(true);
+  };
+
+  const submitOrderHadnler = async userData => {
+    try {
+      const response = await fetch(
+        'https://movies-dummy-db-default-rtdb.europe-west1.firebasedatabase.app/orders.json',
+        {
+          method: 'POST',
+          body: JSON.stringify({
+            user: userData,
+            orderItems: cartCtx.items,
+            totalAmount: cartCtx.totalAmount,
+          }),
+        }
+      );
+
+      if (!response.ok) throw new Error(response.statusText);
+    } catch (err) {
+      console.log(err.message);
+    }
   };
 
   const cartItems = (
@@ -64,7 +84,9 @@ export default function Cart(props) {
         <span>Total Amount</span>
         <span>{totalAmount}</span>
       </div>
-      {isCheckout && hasItems && <Checkout onCancel={props.onClose} />}
+      {isCheckout && hasItems && (
+        <Checkout onCancel={props.onClose} onConfirm={submitOrderHadnler} />
+      )}
       {!isCheckout && modalActions}
     </Modal>
   );

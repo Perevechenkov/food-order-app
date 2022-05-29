@@ -56,6 +56,13 @@ export default function Checkout(props) {
   const confirmHandler = event => {
     event.preventDefault();
 
+    props.onConfirm({
+      name: nameValue,
+      street: streetValue,
+      postalCode: postalValue,
+      city: cityValue,
+    });
+
     resetName();
     resetStreet();
     resetPostal();
